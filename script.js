@@ -1,9 +1,17 @@
-// Mostra una nuova citazione
+const quoteContainer=document.getElementById("quotecontainer");
+const quoteText=document.getElementById("quote");
+const authorText=document.getElementById("author");
+const twitterBtn=document.getElementById("twitter");
+const newQuoteBtn=document.getElementById("newquote");
 
+// Mostra una nuova citazione
 
 function newQuote () {
     let citazione = localQuotes[Math.floor(Math.random() * localQuotes.length)];
-    console.log(citazione);
+    
+    authorText.textContent = citazione.author;
+    quoteText.textContent = citazione.text;
+
 }
 
 // let apiQuotes = []; //Variabile globale
