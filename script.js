@@ -9,7 +9,26 @@ const newQuoteBtn=document.getElementById("newquote");
 function newQuote () {
     let citazione = localQuotes[Math.floor(Math.random() * localQuotes.length)];
     
-    authorText.textContent = citazione.author;
+    // Controllo se l'autore è null, e scrivo "Unknown" al posto di null.
+    if(citazione.author === null)
+    {
+        authorText.textContent = "Unknown";
+    }else
+    {
+        authorText.textContent = citazione.author;
+    }
+
+    //Controllo la lunghezza della citazione per determinare lo stile della pagina
+
+    if(citazione.text.length > 120)
+    {
+        quoteText.classList.add('long-quote');
+    }
+    else
+    {
+        quoteText.classList.remove('long-quote')
+    }
+    
     quoteText.textContent = citazione.text;
 
 }
