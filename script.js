@@ -2,7 +2,7 @@ const quoteContainer=document.getElementById("quotecontainer");
 const quoteText=document.getElementById("quote");
 const authorText=document.getElementById("author");
 const twitterBtn=document.getElementById("twitter");
-const newQuoteBtn=document.getElementById("newquote");
+const newQuoteBtn=document.getElementById("new-quote");
 
 // Mostra una nuova citazione
 
@@ -33,6 +33,14 @@ function newQuote () {
 
 }
 
+// Twitta citazione
+
+function tweetQuote() {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    window.open(twitterUrl, '_blank'); //Il secondo parametro serve per aprire la pagina in una nuova tab
+}
+
+
 // let apiQuotes = []; //Variabile globale
 
 // Prendo le citazioni dall'API
@@ -54,5 +62,9 @@ function newQuote () {
 //Chiamo la funzione una volta caricata la pagina:
 
 // getQuotes();
-
 newQuote();
+
+//Aggiungo gli event listeners
+
+newQuoteBtn.addEventListener('click', newQuote);
+twitterBtn.addEventListener('click',tweetQuote);
