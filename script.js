@@ -10,61 +10,49 @@ let apiQuotes = []; // Variabile globale di citazioni. Se non uso le localQuotes
 // Mostra una nuova citazione
 
 function newQuote () {
-    loading(); //inserisco il caricamento per generare una nuova quote
+    showLoading(); //inserisco il caricamento per generare una nuova quote
     let citazione = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
     // Controllo se l'autore è null, e scrivo "Unknown" al posto di null.
-    if(citazione.author === null)
-    {
+    if(citazione.author === null){
         authorText.textContent = "Unknown";
-    }else
-    {
+    }else{
         authorText.textContent = citazione.author;
     }
 
     //Controllo la lunghezza della citazione per determinare lo stile della pagina
-
-    if(citazione.text.length > 120)
-    {
+    if(citazione.text.length > 120){
         quoteText.classList.add('long-quote');
     }
-    else
-    {
+    else{
         quoteText.classList.remove('long-quote')
     }
     
     //Scrivo la citazione e tolgo il caricamento
-
     quoteText.textContent = citazione.text;
-    complete();
+    removeLoading();
 
 }
 
-// Twitta citazione
-
-function tweetQuote() {
+function tweetQuote() { // Twitta citazione
     const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
     window.open(twitterUrl, '_blank'); //Il secondo parametro serve per aprire la pagina in una nuova tab
 }
 
-// Mostra il caricamento della pagina
-
-function loading () {
+function showLoading () { // Mostra il caricamento della pagina
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Cancella caricamento
-
-function complete () {
-    quoteContainer.hidden = false;
-    loader.hidden = true;
+function removeLoading () { // Cancella caricamento
+    if(!loader.hidden){
+        quoteContainer.hidden = false;
+        loader.hidden = true;
+    }
 }
 
-//Prendo le citazioni dall'API
-
-async function getQuotes() {
-    loading(); //inserisco il caricamento
+async function getQuotes() { //Prendo le citazioni dall'API
+    showLoading(); //inserisco il caricamento
     const apiUrl = 'https://type.fit/api/quotes';
 
     try{
